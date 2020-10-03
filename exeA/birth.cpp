@@ -13,5 +13,5 @@ int main (int argc, char *argv[])
           cin >> temp;
           set.insert(temp);
      }
-     cout << set.size();
+     cout << set.size() << endl;
 }
