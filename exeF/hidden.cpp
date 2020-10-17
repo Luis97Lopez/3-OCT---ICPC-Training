@@ -53,7 +53,8 @@ int getNumberCombinations(    vector<vector<int>> array1,
                     check.insert(array3[k].begin(), array3[k].end());
 
                     if(check.size() == length){
-                         res++;
+                         if(++res == 1,000,000,007)
+                              return res;
                     }
                }
           }
