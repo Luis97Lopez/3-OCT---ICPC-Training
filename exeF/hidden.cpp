@@ -4,8 +4,37 @@
 
 using namespace std;
 
-vector<vector<int>> getArray(string s, string total){
-     return {{0}, {1}, {2}};
+vector<vector<int>> getArray(string w, string p){
+     int lo = -1;
+    vector<vector<int>> set;
+
+    int ws = w.size();
+    for(int i = 0; i < w.size(); i++){
+        for(int j = 0; j < p.size(); j++){
+            if(w[i] == p[j]){
+                vector<int> v;
+                v.push_back(j);
+                i++;
+                lo = j;
+                for(int k = lo + 1; k < p.size(); k++) {
+                    if(i == ws) {
+                        set.push_back(v);
+                        break;
+                    }
+                    if(w[i] == p[k]) {
+                        v.push_back(k);
+                        i++;
+                    }
+                    //cout << k << "\n";
+                }
+                i = 0;
+                j = lo;
+            }
+        }
+        i = w.size() + 1;
+    }
+
+    return set;
 }
 
 int getNumberCombinations(    vector<vector<int>> array1, 
