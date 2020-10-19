@@ -4,37 +4,42 @@
 
 using namespace std;
 
-vector<vector<int>> getArray(string w, string p){
-     int lo = -1;
-    vector<vector<int>> set;
+void printList(vector<int> array){
+    for(int j = 0; j < array.size(); j++){
+        cout << array[j] << " ";
+    }
+    cout << endl;
+}
 
-    int ws = w.size();
-    for(int i = 0; i < w.size(); i++){
-        for(int j = 0; j < p.size(); j++){
-            if(w[i] == p[j]){
-                vector<int> v;
-                v.push_back(j);
-                i++;
-                lo = j;
-                for(int k = lo + 1; k < p.size(); k++) {
-                    if(i == ws) {
-                        set.push_back(v);
-                        break;
-                    }
-                    if(w[i] == p[k]) {
-                        v.push_back(k);
-                        i++;
-                    }
-                    //cout << k << "\n";
+
+vector<vector<int>> getArray(string sub, string full){
+    int i_sub = 0, i_full = 0;
+    vector<vector<int>> total;
+    vector<int> temp = {};
+
+    while(true){
+        if(i_full < full.size() && i_sub < sub.size()){
+            if(sub[i_sub] == full[i_full]){
+                temp.push_back(i_full);
+                if(++i_sub == sub.size()){
+                    total.push_back(temp);
                 }
-                i = 0;
-                j = lo;
+            }
+            i_full++;
+        }
+        else{
+            if(i_full >= full.size() &&temp.size() == 1){
+                break;
+            }
+            else{
+                --i_sub;
+                i_full = temp.back() + 1;
+                temp.pop_back();
             }
         }
-        i = w.size() + 1;
     }
 
-    return set;
+    return total;
 }
 
 int getNumberCombinations(    vector<vector<int>> array1, 
@@ -53,7 +58,7 @@ int getNumberCombinations(    vector<vector<int>> array1,
                     check.insert(array3[k].begin(), array3[k].end());
 
                     if(check.size() == length){
-                         if(++res == 1,000,000,007)
+                         if(++res == 1000000007)
                               return res;
                     }
                }
@@ -62,17 +67,33 @@ int getNumberCombinations(    vector<vector<int>> array1,
      return res;
 }
 
-int main(){
-     string s1, s2, s3, sGlobal;
+/*
+eat
+more
+chicken
+chimeacorkteen
+*/
 
-     cin >> s1;
-     cin >> s2;
-     cin >> s3;
-     cin >> sGlobal;
-     
-     vector<vector<int>> array1 = getArray(s1,sGlobal);
-     vector<vector<int>> array2 = getArray(s2,sGlobal);
-     vector<vector<int>> array3 = getArray(s3,sGlobal);
-     
-     cout << getNumberCombinations(array1, array2, array3, 3) << endl;
+void printMatrix(vector<vector<int>> array1){
+    for(int i = 0; i < array1.size(); i++){
+        for(int j = 0; j <array1[i].size(); j++){
+            cout << array1[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int main(){
+    string s1, s2, s3, sGlobal;
+
+    cin >> s1;
+    cin >> s2;
+    cin >> s3;
+    cin >> sGlobal;
+    
+    vector<vector<int>> array1 = getArray(s1,sGlobal);
+    vector<vector<int>> array2 = getArray(s2,sGlobal);
+    vector<vector<int>> array3 = getArray(s3,sGlobal);
+    
+    cout << getNumberCombinations(array1, array2, array3, sGlobal.size()) << endl;
 }
