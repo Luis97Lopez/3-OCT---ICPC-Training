@@ -2,19 +2,14 @@
 #include <set>
 #include <vector>
 
-using namespace std;
+const unsigned int M = 1000000007;
 
-void printList(vector<int> array){
-    for(int j = 0; j < array.size(); j++){
-        cout << array[j] << " ";
-    }
-    cout << endl;
-}
+using namespace std;
 
 
 vector<vector<int>> getArray(string sub, string full){
     int i_sub = 0, i_full = 0;
-    vector<vector<int>> total;
+    vector<vector<int>> total = {};
     vector<int> temp = {};
 
     while(true){
@@ -28,14 +23,10 @@ vector<vector<int>> getArray(string sub, string full){
             i_full++;
         }
         else{
-            if(i_full >= full.size() &&temp.size() == 1){
+            if(--i_sub == -1)
                 break;
-            }
-            else{
-                --i_sub;
-                i_full = temp.back() + 1;
-                temp.pop_back();
-            }
+            i_full = temp.back() + 1;
+            temp.pop_back();
         }
     }
 
@@ -58,30 +49,18 @@ int getNumberCombinations(    vector<vector<int>> array1,
                     check.insert(array3[k].begin(), array3[k].end());
 
                     if(check.size() == length){
-                         if(++res == 1000000007)
-                              return res;
+                        res = res + 1;
                     }
                }
           }
      }
-     return res;
+     return res % M;
 }
 
-/*
-eat
-more
-chicken
-chimeacorkteen
-*/
-
-void printMatrix(vector<vector<int>> array1){
-    for(int i = 0; i < array1.size(); i++){
-        for(int j = 0; j <array1[i].size(); j++){
-            cout << array1[i][j] << " ";
-        }
-        cout << endl;
-    }
+bool is_valid(int length1, int length2, int length3, int lengthT){
+    return (length1 + length2 + length3) == lengthT;
 }
+
 
 int main(){
     string s1, s2, s3, sGlobal;
@@ -90,10 +69,27 @@ int main(){
     cin >> s2;
     cin >> s3;
     cin >> sGlobal;
+
+    if(!is_valid(s1.size(), s2.size(), s3.size(), sGlobal.size())){
+        cout << 0 << endl;
+        return 0;
+    }
     
     vector<vector<int>> array1 = getArray(s1,sGlobal);
     vector<vector<int>> array2 = getArray(s2,sGlobal);
     vector<vector<int>> array3 = getArray(s3,sGlobal);
     
     cout << getNumberCombinations(array1, array2, array3, sGlobal.size()) << endl;
+    return 0;
 }
+
+
+/*
+
+aaaaaaaaaaaaaa
+bbbbbbbbbbbbbb
+cccccccccccccc
+abcabcabcabcabcabcabcabcabcabcabcabcabcabc
+
+
+*/
