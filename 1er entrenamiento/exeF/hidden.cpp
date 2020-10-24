@@ -78,8 +78,7 @@ int main(){
     vector<vector<int>> array1 = getArray(s1,sGlobal);
     vector<vector<int>> array2 = getArray(s2,sGlobal);
     vector<vector<int>> array3 = getArray(s3,sGlobal);
-    
-    cout << getNumberCombinations(array1, array2, array3, sGlobal.size()) << endl;
+    //cout << getNumberCombinations(array1, array2, array3, sGlobal.size()) << endl;
     return 0;
 }
 
