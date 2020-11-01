@@ -11,6 +11,7 @@ bool search_answer(vector<int> camino, int costo){
      if(camino.size() == videos.size()){
           if(costo < res){
                res = costo;
+               
           }
           return true;
      }else{
@@ -22,7 +23,6 @@ bool search_answer(vector<int> camino, int costo){
                                    camino.push_back(i);
                                    bool temp = search_answer(camino, videos[i][j] + 1);
                                    camino.pop_back();
-
                                    if(!temp ){
                                         break;
                                    }
@@ -33,15 +33,6 @@ bool search_answer(vector<int> camino, int costo){
           }
      }
      return false;
-}
-
-void search_answer2(){
-     vector<int> camino = {};
-     int costo = 0;
-
-     while (true){
-          
-     }
 }
 
 
@@ -62,7 +53,7 @@ int main(){
      }
 
      search_answer({}, 0);
-     //search_answer2();
+
      cout << res << endl;
      return 0;
 }
