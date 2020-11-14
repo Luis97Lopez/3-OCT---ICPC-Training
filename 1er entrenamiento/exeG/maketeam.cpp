@@ -11,12 +11,11 @@ bool search_answer(vector<int> camino, int costo){
      if(camino.size() == videos.size()){
           if(costo < res){
                res = costo;
-               
           }
           return true;
      }else{
           for(int i = 0; i < videos.size(); i++){
-               if(find(camino.begin(), camino.end(), i) == camino.end()){
+               if(find(camino.begin (), camino.end(), i) == camino.end()){
                     if(costo <= *(videos[i].end() - 1)){
                          for(int j=0; j < videos.size(); j++){
                               if(costo <= videos[i][j]){
